@@ -65,7 +65,7 @@ func getEnv() string {
 func NewClientIpInterceptor() middleware.MiddlewareInterceptor {
 	return func(w http.ResponseWriter, r *http.Request, next http.HandlerFunc) {
 		ip := ClientIP(r)
-		klog.Infoln("客户端ip为: %s", ip)
+		klog.Infof("客户端ip为: %s\n", ip)
 		next(w, r)
 	}
 }
@@ -75,7 +75,7 @@ func NewResponseCodeInterceptor() middleware.MiddlewareInterceptor {
 
 		next(w, r)
 		value := reflect.ValueOf(w).Elem()
-		klog.Infoln("返回状态码为: %d", value.FieldByName("status"))
+		klog.Infof("返回状态码为: %d\n", value.FieldByName("status"))
 	}
 }
 
